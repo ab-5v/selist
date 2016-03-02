@@ -1,0 +1,37 @@
+{
+  "name": "selist",
+  "version": "0.0.1",
+  "description": "Lists selectors used in cssfile",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/compare.js"
+  },
+  "bin": {
+    "selist": "bin/selist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artjock/selist.git"
+  },
+  "keywords": [
+    "css",
+    "selector",
+    "cli"
+  ],
+  "author": "Artur Burtsev <artjock@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artjock/selist/issues"
+  },
+  "homepage": "https://github.com/artjock/selist#readme",
+  "dependencies": {
+    "css": "^2.2.1",
+    "nopt": "^3.0.6",
+    "traverse": "^0.6.6"
+  },
+  "devDependencies": {
+    "colors": "^1.1.2",
+    "diff": "^2.2.1",
+    "glob": "^7.0.0"
+  }
+}

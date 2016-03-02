@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var selist = require('../');
+
+var nopt = require('nopt');
+var opts = { 'strict': Boolean };
+var args = nopt(opts, {}, process.argv, 2);
+
+var input = '';
+
+process.stdin.setEncoding('utf8');
+process.stdin.on('readable', () => input += (process.stdin.read() || ''));
+process.stdin.on('end', () => {
+    var selectors = selist.parse(input, {strict: args.strict});
+    if (selectors) {
+        process.stdout.write(selectors.join('\n') + '\n');
+        process.exit();
+    } else {
+        process.exit(1);
+    }
+});

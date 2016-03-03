@@ -2,7 +2,7 @@
   "name": "selist",
   "version": "0.0.2",
   "description": "Lists selectors used in cssfile",
-  "main": "index.js",
+  "main": "lib/parse.js",
   "scripts": {
     "test": "test/compare"
   },

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var selist = require('../');
+var selist = require('../lib/parse');
 
 var nopt = require('nopt');
 var opts = { 'strict': Boolean };

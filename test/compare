@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 require('colors')
-var selist = require('../');
+var selist = require('../lib/parse');
 
 var fs = require('fs');
 var glob = require('glob');

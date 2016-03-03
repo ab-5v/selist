@@ -2,6 +2,7 @@
 
 require('colors')
 var selist = require('../lib/parse');
+var filesize = require('filesize');
 
 var fs = require('fs');
 var glob = require('glob');
@@ -53,8 +54,9 @@ glob(pattern, function(err, files) {
 
     });
 
-    console.log('selist:', time('selist') + 'ms', Math.ceil(bytes/time('selist')) + 'bytes/ms');
-    console.log('strict:', time('strict') + 'ms', Math.ceil(bytes/time('strict')) + 'bytes/ms');
+    console.log('total css size processed', filesize(bytes));
+    console.log('selist took', time('selist') + 'ms on', filesize(bytes/time('selist')) + '/ms');
+    console.log('strict took', time('strict') + 'ms on', filesize(bytes/time('strict')) + '/ms');
 });
 
 function getDiff(v0, v1, options) {

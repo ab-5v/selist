@@ -1,0 +1,94 @@
+#!/usr/bin/env node
+
+require('colors')
+var selist = require('../');
+
+var fs = require('fs');
+var glob = require('glob');
+var diff = require('diff');
+var args = require('nopt')({
+    'grep': String,
+    'bail': Boolean,
+    'fail': Boolean
+});
+
+var pattern = './test/css/' + (args.grep ? '*' + args.grep : '') + '*.css';
+
+glob(pattern, function(err, files) {
+    if (err) { return; }
+    var bytes = 0;
+
+    files.some(function(path) {
+        process.stdout.write((path + ' ... ')['gray']);
+
+        var diffs;
+        var input = fs.readFileSync(path, 'utf8');
+        bytes += size(input);
+
+        dirty = time('dirty', () => selist.parseDirty(input));
+        strict = time('strict', () => selist.parseStrict(input));
+
+        if (strict) {
+            diffs = getDiff(strict, dirty);
+        }
+
+        if (diffs || !strict) {
+            process.stdout.write('FAIL'['red'])
+            if (diffs) {
+                process.stdout.write('\n' + diffs);
+            }
+            process.stdout.write('\n');
+            if (args.bail) {
+                return true;
+            }
+        } else {
+            process.stdout.write('OK'['green']);
+            if (args.fail) {
+                process.stdout.clearLine();
+                process.stdout.cursorTo(0);
+            } else {
+                process.stdout.write('\n');
+            }
+        }
+
+    });
+
+    console.log('dirty:', time('dirty') + 'ms', Math.ceil(bytes/time('dirty')) + 'bytes/ms');
+    console.log('strict:', time('strict') + 'ms', Math.ceil(bytes/time('strict')) + 'bytes/ms');
+});
+
+function getDiff(v0, v1, options) {
+    var result = '';
+
+    diff
+        .diffLines(v0.join('\n'), v1.join('\n'))
+        .forEach(function(part) {
+            var color;
+            if (part.added) { color = 'green'; }
+            if (part.removed) { color = 'red'; }
+
+            if (color) {
+                result += part.value[color];
+            }
+        });
+
+    return result;
+}
+
+function time(name, run) {
+    if (!time.hasOwnProperty(name)) { time[name] = 0; }
+
+    if (typeof run !== 'function') {
+        return time[name];
+    }
+
+    var timer = +new Date();
+    var result = run();
+    time[name] += +new Date() - timer;
+
+    return result;
+}
+
+function size(s) {
+    return encodeURIComponent(s).replace(/%[A-F\d]{2}/g,'x').length;
+}

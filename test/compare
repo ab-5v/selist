@@ -25,14 +25,14 @@ glob(pattern, function(err, files) {
         var input = fs.readFileSync(path, 'utf8');
         bytes += size(input);
 
-        dirty = time('dirty', () => selist.parse(input));
-        strict = time('strict', () => selist.parse(input, {strict: 1}));
+        v0 = time('strict', () => selist.parse(input, {strict: 1}));
+        v1 = time('selist', () => selist.parse(input));
 
-        if (strict) {
-            diffs = getDiff(strict, dirty);
+        if (v0) {
+            diffs = getDiff(v0, v1);
         }
 
-        if (diffs || !strict) {
+        if (diffs || !v0) {
             process.stdout.write('FAIL'['red'])
             if (diffs) {
                 process.stdout.write('\n' + diffs);
@@ -53,7 +53,7 @@ glob(pattern, function(err, files) {
 
     });
 
-    console.log('dirty:', time('dirty') + 'ms', Math.ceil(bytes/time('dirty')) + 'bytes/ms');
+    console.log('selist:', time('selist') + 'ms', Math.ceil(bytes/time('selist')) + 'bytes/ms');
     console.log('strict:', time('strict') + 'ms', Math.ceil(bytes/time('strict')) + 'bytes/ms');
 });
 

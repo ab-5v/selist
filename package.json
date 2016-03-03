@@ -1,6 +1,6 @@
 {
   "name": "selist",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Lists selectors used in cssfile",
   "main": "lib/parse.js",
   "scripts": {

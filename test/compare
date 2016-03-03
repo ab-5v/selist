@@ -25,8 +25,8 @@ glob(pattern, function(err, files) {
         var input = fs.readFileSync(path, 'utf8');
         bytes += size(input);
 
-        dirty = time('dirty', () => selist.parseDirty(input));
-        strict = time('strict', () => selist.parseStrict(input));
+        dirty = time('dirty', () => selist.parse(input));
+        strict = time('strict', () => selist.parse(input, {strict: 1}));
 
         if (strict) {
             diffs = getDiff(strict, dirty);

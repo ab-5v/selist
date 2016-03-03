@@ -5,7 +5,7 @@ CSS selectors extractor.
 
 * Small as less than 500B.
 * Fast as 50KB of parsed css per ms on my macbook.
-* Reliable enought (to get the same results as strict, AST based, parser</div> [reworkcss/css](https://github.com/reworkcss/css) on my 30MB of CSS).
+* Reliable enough (to get the same results as strict, AST based, parser</div> [reworkcss/css](https://github.com/reworkcss/css) on my 30MB of CSS).
 
 Install it with npm:
 ```

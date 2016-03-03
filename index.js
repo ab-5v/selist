@@ -51,7 +51,10 @@ module.exports = {
         require('traverse')(ast).map((node) => {
             if (node && node.type === 'rule') {
                 node.selectors.forEach((selector) => {
-                    res.push(selector.replace(this._rePseudoElement, '').trim());
+                    selector = selector.replace(this._rePseudoElement, '').trim();
+                    if (selector && !/^@/.test(selector)) {
+                        res.push(selector);
+                    }
                 });
             }
         });

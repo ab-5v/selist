@@ -14,7 +14,7 @@ npm i selist
 And use as a CLI tool:
 ```
 cat common.css | selist             # selist regexp parser
-cat common.css | selist --strict    # strict ast parser
+cat common.css | selist --strict    # strict ast parser with parsing errors to STDERR
 ```
 Or as a node module:
 ```

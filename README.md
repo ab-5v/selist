@@ -1,5 +1,8 @@
 selist
 ======
+![Travis](https://travis-ci.org/artjock/selist.svg)
+![Dependencies](https://david-dm.org/artjock/selist.svg)
+
 
 CSS selectors extractor.
 

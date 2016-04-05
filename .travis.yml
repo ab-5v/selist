@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+    - "5"
+    - "4"
+    - "0.12"
+    - "0.10"
+before_install:
+    - wget https://yastatic.net/autoru-frontend-desktop/0.0.416/bundles/common/_common.css -O test/css/test.css

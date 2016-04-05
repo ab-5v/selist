@@ -9,8 +9,10 @@ var args = nopt(opts, {}, process.argv, 2);
 var input = '';
 
 process.stdin.setEncoding('utf8');
-process.stdin.on('readable', () => input += (process.stdin.read() || ''));
-process.stdin.on('end', () => {
+process.stdin.on('readable', function() {
+    input += (process.stdin.read() || '')
+});
+process.stdin.on('end', function() {
     var selectors = selist.parse(input, {strict: args.strict});
     if (selectors) {
         process.stdout.write(selectors.join('\n') + '\n');

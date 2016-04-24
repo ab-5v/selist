@@ -15,7 +15,7 @@ function selist(input) {
     var i, l, res = [],
         reClean = /(?:\/\*[\s\S]*?\*\/|::?(?:before|after|focus|hover|active|-[a-z-]+)|@(?:media|charset|\-)[^{;]*?(?:\{|;))/g,
         reEmpty = /^(?:\s*|from|to)$/,
-        reSelector = /(?:(?:^|\})\s*)([^%}{@]+?)(?:\s*(?:$|\{))/g,
+        reSelector = /(?:(?:^|\})\s*)([^%}{@!]+?)(?:\s*(?:$|\{))/g,
         reSeparator = /\s*,\s*/;
 
     if (!input) { return res; }
